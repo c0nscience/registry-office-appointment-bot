@@ -238,6 +238,7 @@ typings/
 [Ss]cripts
 pyvenv.cfg
 .venv
+venv
 pip-selfcheck.json
 
 # End of https://www.gitignore.io/api/virtualenvs

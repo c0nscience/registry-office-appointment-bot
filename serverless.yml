@@ -21,6 +21,14 @@ provider:
   name: aws
   runtime: python3.7
 
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+
+
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
