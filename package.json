@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/c0nscience/registry-office-appointment-bot#readme",
   "dependencies": {
-    "serverless-python-requirements": "^4.2.5"
+    "serverless-python-requirements": "4.2.4"
   }
 }
