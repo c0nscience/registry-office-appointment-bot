@@ -221,3 +221,23 @@ typings/
 .dynamodb/
 
 # End of https://www.gitignore.io/api/node
+
+
+# Created by https://www.gitignore.io/api/virtualenv
+# Edit at https://www.gitignore.io/?templates=virtualenv
+
+### VirtualEnv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
+
+# End of https://www.gitignore.io/api/virtualenvs
