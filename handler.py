@@ -2,7 +2,7 @@ import json
 import random
 import re
 from datetime import datetime
-import tzlocal
+import pytz
 
 import requests
 from bs4 import BeautifulSoup
@@ -85,7 +85,7 @@ def fetch_site_and_check(s, url, depth, params=None, referer=None):
         return available_appointment_link, url
 
 
-def hello(event, context):
+def scraper(event, context):
     paramsMitte = {
         'termin': 1,
         'dienstleister': '327795',
@@ -115,7 +115,7 @@ def hello(event, context):
     available_appointment_link, referer = fetch_site_and_check(s,
                                                                'https://service.berlin.de/terminvereinbarung/termin/tag.php',
                                                                6,
-                                                               params=paramsMitte)
+                                                               params=paramsSpandau)
 
     # search in timetable for the first available time
     # print(available_appointment_link, referer)
@@ -123,19 +123,20 @@ def hello(event, context):
         timestamp_string = re.findall('\\d+', available_appointment_link)[0]
         timestamp = int(timestamp_string)
 
-        local_timezone = tzlocal.get_localzone()
+        local_timezone = pytz.timezone('Europe/Berlin')
         local_time = datetime.fromtimestamp(timestamp, local_timezone)
 
         appointment_date = local_time.strftime('%d.%m.%Y')
 
         r = requests.Request('Get', 'https://service.berlin.de/terminvereinbarung/termin/tag.php',
-                             params=paramsSpandau)
+                             params=paramsMitte)
 
         prep_r = r.prepare()
 
         body = {
             'payload': json.dumps({'text': f'Termin am {appointment_date}!! <{prep_r.url}|HIER KLICKEN>'})
         }
+        # TODO parametrize slack url
         response = requests.post('https://hooks.slack.com/services/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', data=body)
 
         # TODO we are stuck here since we can't trick the robot detection -.-
@@ -149,4 +150,4 @@ def hello(event, context):
     return {}
 
 
-# hello(None, None)
+# scraper(None, None)
