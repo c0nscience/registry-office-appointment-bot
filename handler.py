@@ -115,7 +115,7 @@ def hello(event, context):
     available_appointment_link, referer = fetch_site_and_check(s,
                                                                'https://service.berlin.de/terminvereinbarung/termin/tag.php',
                                                                6,
-                                                               params=paramsSpandau)
+                                                               params=paramsMitte)
 
     # search in timetable for the first available time
     # print(available_appointment_link, referer)
@@ -138,10 +138,7 @@ def hello(event, context):
         }
         response = requests.post('https://hooks.slack.com/services/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', data=body)
 
-        print(response.status_code)
-        print(response.text)
-
-        # we are stuck here since we can't trick the robot detection -.-
+        # TODO we are stuck here since we can't trick the robot detection -.-
         # time.sleep(random.randint(3, 8))
         # headers['Referer'] = referer
         # response = s.get(f'https://service.berlin.de{available_appointment_link}', headers=headers)
