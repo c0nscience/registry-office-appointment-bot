@@ -149,4 +149,4 @@ def hello(event, context):
     return {}
 
 
-hello(None, None)
+# hello(None, None)
