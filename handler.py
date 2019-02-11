@@ -100,6 +100,8 @@ def scraper(event, context):
         'herkunft': 1
     }
 
+    params = paramsMitte
+
     # Heiraten ohne Ausland Anmeldung: 318961
     # Standesamt Mitte: 327795
     # Standesamt Spandau: 122932
@@ -115,7 +117,7 @@ def scraper(event, context):
     available_appointment_link, referer = fetch_site_and_check(s,
                                                                'https://service.berlin.de/terminvereinbarung/termin/tag.php',
                                                                6,
-                                                               params=paramsSpandau)
+                                                               params=params)
 
     # search in timetable for the first available time
     # print(available_appointment_link, referer)
@@ -129,7 +131,7 @@ def scraper(event, context):
         appointment_date = local_time.strftime('%d.%m.%Y')
 
         r = requests.Request('Get', 'https://service.berlin.de/terminvereinbarung/termin/tag.php',
-                             params=paramsMitte)
+                             params=params)
 
         prep_r = r.prepare()
 
